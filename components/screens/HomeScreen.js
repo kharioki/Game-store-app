@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StatusBar} from 'react-native';
 import styled from 'styled-components';
 
@@ -6,6 +6,12 @@ import Text from '../Text';
 import categoryList from '../../util/categories.js';
 
 export default HomeScreen = () => {
+  const [selectedCategory, setSelectedCategory] = useState('All');
+
+  const changeCategory = category => {
+    setSelectedCategory(category);
+  };
+
   return (
     <Container>
       <StatusBar barStyle="light-content" />
@@ -25,11 +31,14 @@ export default HomeScreen = () => {
         <Avatar source={require('../../assets/bit19.png')} />
       </Header>
 
-      <Categories horizontal={true}>
+      <Categories horizontal={true} showsHorizontalScrollIndicator={false}>
         {categoryList.map((category, index) => {
           return (
-            <Category key={index}>
-              <CategoryName>{category}</CategoryName>
+            <Category key={index} onPress={() => changeCategory(category)}>
+              <CategoryName
+                selected={selectedCategory === category ? true : false}>
+                {category}
+              </CategoryName>
             </Category>
           );
         })}
@@ -55,8 +64,18 @@ const Avatar = styled.Image`
   height: 40px;
 `;
 
-const Categories = styled.ScrollView``;
+const Categories = styled.ScrollView`
+  margin-top: 32px;
+  flex-grow: 0;
+`;
 
-const Category = styled.TouchableOpacity``;
+const Category = styled.TouchableOpacity`
+  align-items: center;
+  margin: 0 16px;
+  height: 32px;
+`;
 
-const CategoryName = styled(Text)``;
+const CategoryName = styled(Text)`
+  color: ${props => (props.selected ? '#819ee5' : '#9a9a9a')};
+  font-weight: ${props => (props.selected ? '700' : '500')};
+`;
