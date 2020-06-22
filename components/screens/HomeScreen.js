@@ -3,7 +3,7 @@ import {StatusBar} from 'react-native';
 import styled from 'styled-components';
 
 import Text from '../Text';
-import categoryList from '../../categories.js';
+import categoryList from '../../util/categories.js';
 
 export default HomeScreen = () => {
   return (
@@ -25,12 +25,14 @@ export default HomeScreen = () => {
         <Avatar source={require('../../assets/bit19.png')} />
       </Header>
 
-      <Categories>
-        {categoryList.map((category, index) => (
-          <Category key={index}>
-            <CategoryName>{category}</CategoryName>
-          </Category>
-        ))}
+      <Categories horizontal={true}>
+        {categoryList.map((category, index) => {
+          return (
+            <Category key={index}>
+              <CategoryName>{category}</CategoryName>
+            </Category>
+          );
+        })}
       </Categories>
     </Container>
   );
