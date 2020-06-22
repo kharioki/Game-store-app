@@ -3,6 +3,7 @@ import {StatusBar} from 'react-native';
 import styled from 'styled-components';
 
 import Text from '../Text';
+import categoryList from '../../categories.js';
 
 export default HomeScreen = () => {
   return (
@@ -10,8 +11,27 @@ export default HomeScreen = () => {
       <StatusBar barStyle="light-content" />
 
       <Header>
-        <Text>Kharioki</Text>
+        <Text large>
+          Hello,{' '}
+          <Text large bold>
+            Kharioki
+          </Text>
+          {`\n`}
+          <Text large bold>
+            Best games for today.
+          </Text>
+        </Text>
+
+        <Avatar source={require('../../assets/bit19.png')} />
       </Header>
+
+      <Categories>
+        {categoryList.map((category, index) => (
+          <Category key={index}>
+            <CategoryName>{category}</CategoryName>
+          </Category>
+        ))}
+      </Categories>
     </Container>
   );
 };
@@ -21,4 +41,20 @@ const Container = styled.SafeAreaView`
   background-color: #343434;
 `;
 
-const Header = styled.View``;
+const Header = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 16px 32px 0 32px;
+`;
+
+const Avatar = styled.Image`
+  width: 40px;
+  height: 40px;
+`;
+
+const Categories = styled.ScrollView``;
+
+const Category = styled.TouchableOpacity``;
+
+const CategoryName = styled(Text)``;
