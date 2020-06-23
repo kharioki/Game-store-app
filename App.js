@@ -9,6 +9,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeScreen from './components/screens/HomeScreen';
 import LiveScreen from './components/screens/LiveScreen';
 import ProfileScreen from './components/screens/ProfileScreen';
+import GameScreen from './components/screens/GameScreen';
 
 const AppStack = createStackNavigator();
 const TabNav = createBottomTabNavigator();
@@ -29,20 +30,27 @@ const TabNavScreen = () => {
     <TabNav.Navigator
       tabBarOptions={tabBarOptions}
       screenOptions={({route}) => ({
-        tabBarIcon: ({focussed}) => {
+        tabBarIcon: ({focused}) => {
           let iconName;
 
           switch (route.name) {
             case 'HomeScreen':
               iconName = 'home';
               break;
+            case 'LiveScreen':
+              iconName = 'game-controller';
+              break;
+            case 'ProfileScreen':
+              iconName = 'user';
+              break;
 
             default:
+              iconName = 'home';
               break;
           }
 
           return (
-            <TabBarIconContainer focussed={focussed}>
+            <TabBarIconContainer focused={focused}>
               <Entypo name={iconName} size={24} color="#ffffff" />
             </TabBarIconContainer>
           );
@@ -55,16 +63,19 @@ const TabNavScreen = () => {
   );
 };
 
-const App = () => {
+export default App = () => {
   return (
     <NavigationContainer>
-      <AppStack.Navigator headerMode="none">
+      <AppStack.Navigator mode="modal" headerMode="none">
         <AppStack.Screen name="App" component={TabNavScreen} />
+        <AppStack.Screen name="GameScreen" component={GameScreen} />
       </AppStack.Navigator>
     </NavigationContainer>
   );
 };
 
-export default App;
-
-const TabBarIconContainer = styled.View``;
+const TabBarIconContainer = styled.View`
+  background-color: ${props => (props.focused ? '#819ee5' : '#343434')};
+  padding: 2px 16px;
+  border-radius: 32px;
+`;
