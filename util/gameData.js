@@ -1,4 +1,4 @@
-export default gameData = [
+export default games = [
   {
     id: 1,
     title: 'Unforeseen Incidents',
@@ -12,7 +12,7 @@ export default gameData = [
     cover: require('../assets/unforeseen_1.jpg'),
     screenshots: [
       require('../assets/Unforeseen_2.jpg'),
-      require('../assets/Unforeseen_3.jpg'),
+      require('../assets/Unforeseen_3.png'),
       require('../assets/Unforeseen_4.jpg'),
       require('../assets/Unforeseen_5.jpg'),
       require('../assets/Unforeseen_6.jpg'),
