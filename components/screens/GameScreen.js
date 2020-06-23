@@ -4,12 +4,30 @@ import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import Text from '../Text';
-import gameData from '../../util/gameData';
 
 Icon.loadFont();
 
 export default GameScreen = ({route, navigation}) => {
   const {game} = route.params;
+
+  const renderStars = () => {
+    let stars = [];
+
+    for (let s = 1; s <= 5; s++) {
+      stars.push(
+        <Icon
+          key={s}
+          name="ios-star"
+          size={16}
+          style={{marginRight: 5}}
+          color={Math.floor(game.rating) >= s ? '#819ee5' : '#434958'}
+        />,
+      );
+    }
+
+    return <Stars>{stars}</Stars>;
+  };
+
   return (
     <GameContainer>
       <StatusBar barStyle="light-content" />
@@ -37,11 +55,36 @@ export default GameScreen = ({route, navigation}) => {
       </GameInfoContainer>
 
       <GameStatsContainer>
-        <Text>{game.rating}</Text>
-        <Text>{game.category[0]}</Text>
-        <Text>{game.age}</Text>
-        <Text>Game of the day</Text>
+        {renderStars()}
+        <Text heavy color="#9a9a9a">
+          {game.rating}
+        </Text>
+        <Text bold color="#9a9a9a">
+          {game.category[0]}
+        </Text>
+        <Text bold color="#9a9a9a">
+          {game.age}
+        </Text>
+        <Text bold color="#9a9a9a">
+          Game of the day
+        </Text>
       </GameStatsContainer>
+
+      <ScreenShotsContainer>
+        <ScreenShots horizontal={true} showsHorizontalScrollIndicator={false}>
+          {game.screenshots.map((screenshot, index) => {
+            return (
+              <ScreenShotContainer key={index}>
+                <ScreenShot source={screenshot} />
+              </ScreenShotContainer>
+            );
+          })}
+        </ScreenShots>
+      </ScreenShotsContainer>
+
+      <Description medium color="#9a9a9a">
+        {game.description}
+      </Description>
     </GameContainer>
   );
 };
@@ -106,4 +149,33 @@ const GameStatsContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
   margin: 0 16px;
+`;
+
+const Stars = styled.View`
+  flex-direction: row;
+`;
+
+const ScreenShotsContainer = styled.View`
+  margin: 8px 0;
+`;
+
+const ScreenShots = styled.ScrollView``;
+
+const ScreenShotContainer = styled.View`
+  padding: 16px;
+  shadow-color: #000000;
+  shadow-offset: 1px 1px;
+  shadow-opacity: 0.5;
+  shadow-radius: 5px;
+`;
+
+const ScreenShot = styled.Image`
+  height: 200px;
+  width: 300px;
+  border-radius: 12px;
+`;
+
+const Description = styled(Text)`
+  margin: 0 16px;
+  line-height: 22px;
 `;

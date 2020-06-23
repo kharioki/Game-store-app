@@ -5,7 +5,7 @@ export default games = [
     teaser:
       'A classical style interactive mystery set in a beautifully hand-painted world.',
     description:
-      'Unforeseen Incidents is a critical style interactive mystery set in a beautifully hand-painted world.',
+      'Unforeseen Incidents is a critical style interactive mystery set in a beautifully hand-painted world. Join Harper Pendrell and experience a challenging investigation, smart dialog and a rich cast of characters in this thrilling new adventure game.',
     rating: 4.5,
     category: ['Action', 'Indie'],
     age: '12+',
