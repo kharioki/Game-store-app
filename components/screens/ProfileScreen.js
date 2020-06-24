@@ -1,10 +1,23 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {StatusBar} from 'react-native';
+import styled from 'styled-components';
+import Entypo from 'react-native-vector-icons/Entypo';
 
-export default function ProfileScreen() {
+import Text from '../Text';
+import games from '../../util/gameData';
+
+Entypo.loadFont();
+
+export default ProfileScreen = () => {
   return (
-    <View>
+    <Container>
+      <StatusBar barStyle="light-content" />
       <Text>Profile screen</Text>
-    </View>
+    </Container>
   );
-}
+};
+
+const Container = styled.SafeAreaView`
+  background-color: #343434;
+  flex: 1;
+`;
