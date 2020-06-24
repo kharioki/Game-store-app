@@ -68,7 +68,7 @@ export default ProfileScreen = () => {
           <Entypo name="cog" size={24} color="#ffffff" />
         </Settings>
         <Logout>
-          <Text>Logout</Text>
+          <Text heavy>Logout</Text>
         </Logout>
       </Account>
     </Container>
